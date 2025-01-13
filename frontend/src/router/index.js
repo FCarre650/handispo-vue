@@ -1,36 +1,36 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Login from '/src/views/Login.vue'
-import Register from '/src/views/Register.vue'
-import Verify_code from '../views/Verify_code.vue';
-import Visit from '../views/Visit.vue';
+import Home from '/src/views/Home.vue'
+import AssoList from '/src/views/AssoList.vue'
+import SportsCatalog from '../views/SportsCatalog.vue';
+import Map from '../views/Map.vue';
 
 
 
 const routes = [
     {
         path: '/',
-        redirect: '/login',
+        redirect: '/home',
     },
 
    {
-      path: '/login',
-      component: Login,
+      path: '/home',
+      component: Home,
    },
 
    {
-    path: '/register',
-    component: Register,
+    path: '/asso-list',
+    component: AssoList,
    },
 
    {
-    path: '/verify_code',
-    component: Verify_code,
+    path: '/sports-catalog',
+    component: SportsCatalog,
    },
 
    {
-    path: '/visit',
-    component: Visit,
+    path: '/map',
+    component: Map,
    },
 
  
