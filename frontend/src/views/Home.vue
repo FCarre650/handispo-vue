@@ -18,9 +18,8 @@
         </div>
 
         <div class="boutons_bas">
-            <button class="btn_liste">LISTE DES ASSOCIATIONS</button>
-            <button class="btn_carte">CARTE</button>
-        </div>
+            <button class="btn_liste" @click="$router.push('AssoList')">LISTE DES ASSOCIATIONS</button>
+            <button class="btn_carte" @click="$router.push('Map')">CARTE</button>        </div>
     </section>
 
     <footer>
