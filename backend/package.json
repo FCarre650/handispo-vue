@@ -22,7 +22,9 @@
     "email": "",
     "url": ""
   },
-  "contributors": [],
+  "contributors": [
+
+  ],
   "scripts": {
     "dev": "",
     "test": ""
@@ -37,5 +39,9 @@
     "nodemailer": "^6.9.16",
     "prisma": "^6.2.1",
     "uuid": "^11.0.5"
+
+  },
+  "devDependencies": {
+
   }
 }
