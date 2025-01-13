@@ -3,7 +3,7 @@ node_modules
 .env *
 dist/
 .vscode/
-.gitignore
 .env
 ecosystem.config.cjs
-backend/package-lock.json
+package-lock.json
+
