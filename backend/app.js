@@ -29,6 +29,18 @@ app.use('/assets', express.static('./assets'))
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+app.post("/api/listAsso", async (req, res) => {
+   const { name, location, address, postalCode, city } = req.body
+
+})
+
+
+
+
+
+
+
 // Configuration du port d'écoute
 const PORT = process.env.PORT || 3010  // Utilisation du port défini dans les variables d'environnement ou 3000 par défaut
 app.listen(PORT, () => {
