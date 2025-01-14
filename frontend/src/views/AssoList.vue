@@ -14,7 +14,7 @@ import HeaderBar from '/src/components/header.vue'
 
         <section class="boutons">
             <div class="bouton_haut">
-                <button class="btn_catalogue">LIIIIIIIIIIISTE</button>
+                <button class="btn_catalogue">LIIIIIIIIIISTE</button>
             </div>
         </section>
 
