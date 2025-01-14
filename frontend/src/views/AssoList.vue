@@ -1,23 +1,20 @@
 <script setup>
     import FooterButtons from '/src/components/footer.vue'
     import HeaderBar from '/src/components/header.vue'
-    import { associations } from '/src/use/UseAssociation'
+    import { associations } from "/src/use/useAssociation"
+    import {ref, onMounted} from 'vue'
 
-    import { ref, onMounted } from 'vue'
-
-    const assoList = ref([])
+    const associationList = ref([])
 
     onMounted(async () => {
         const response = await fetch("/api/listAsso")
-        assoList.value = await response.json()
-        console.log("Liste des associations", assoList.value)
-
-        for (const association of assoList.value) {
+        associationList.value = await response.json() 
+        console.log("associationList", associationList.value)
+        
+        for (const association of associationList.value) {
             associations.value[association.id] = association
-        }
-    })
-    
-
+    }
+ })
 </script>
 
 <template>
@@ -31,23 +28,24 @@
 
         <section class="boutons">
             <div class="bouton_haut">
-                <button class="btn_catalogue">LIIIIIIIIIIISTE</button>
+                <button class="btn_catalogue">LIIIIIIIIIISTE</button>
             </div>
         </section>
 
         <section>
             <div class="flex">
-                <ul class="list">
-                    <li v-for="association of assoList" key="association.id">
-                        <div class="box">
-                            <p>{{ association.name }}</p>
+                <v-list class="list">
+                    <v-list-item v-for="association of associationList" key="association.id"> 
+                        <div class=" boxAsso">
+                            <p>{{ association.nom }}</p>
                             <p>{{ association.location }}</p>
                             <p>{{ association.address }}</p>
-                            <p>{{ association.postalCode }}</p>
-                            <p>{{ association.city }}</p>
+                            <p>{{ association.postalCode }} {{ association.city }}</p>
                         </div>
-                    </li>
-                </ul>
+                    </v-list-item>
+                </v-list>
+ 
+                <router-view class="detail"></router-view>
             </div>
         </section>
 
@@ -57,16 +55,8 @@
 
 </template>
 
-
-<style>
-
-.box {
-    border: solid;
-    background-color: grey;
-}
-
-li {
-    list-style-type: none;
-}
-
+<style scoped>
+    .boxAsso{
+        border:solid 1px;
+    }
 </style>
