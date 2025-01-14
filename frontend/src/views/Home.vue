@@ -22,7 +22,7 @@ import HeaderBar from '/src/components/header.vue'
 
         <div class="boutons_bas">
             <button class="btn_liste" @click="$router.push('asso-list')">LISTE DES ASSOCIATIONS</button>
-            <button class="btn_carte" @click="$router.push('Map')">CARTE</button>        </div>
+            <button class="btn_carte" @click="$router.push('map')">CARTE</button>        </div>
     </section>
 
     <FooterButtons/>
