@@ -30,7 +30,7 @@ app.use('/assets', express.static('./assets'))
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Configuration du port d'écoute
-const PORT = process.env.PORT || 3000  // Utilisation du port défini dans les variables d'environnement ou 3000 par défaut
+const PORT = process.env.PORT || 3010  // Utilisation du port défini dans les variables d'environnement ou 3000 par défaut
 app.listen(PORT, () => {
    // Affichage d'un message dans la console pour indiquer que le serveur est en cours d'exécution
    console.log(`Server listening on port http://localhost:${PORT}`)
