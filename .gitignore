@@ -6,4 +6,4 @@ dist/
 .env
 ecosystem.config.cjs
 package-lock.json
-
+frontend/package-lock.json
