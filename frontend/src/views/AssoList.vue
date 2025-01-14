@@ -22,14 +22,18 @@
         <HeaderBar />
 
         <section class="AssoList">
-            <h1>LISTE DES ASSOS!</h1>
+            <h1>LISTE DES ASSOCIATIONS</h1>
 
         </section>
 
+        
+
         <section class="boutons">
-            <div class="bouton_haut">
-                <button class="btn_catalogue">LIIIIIIIIIISTE</button>
+            <div class="bouton_bas">
+                <button class="btn_filtres">FILTRES</button>
+                <button class="btn_geolocalisation">GÉOLOCALISATION</button>
             </div>
+            
         </section>
 
         <section>
@@ -41,6 +45,7 @@
                             <p>{{ association.location }}</p>
                             <p>{{ association.address }}</p>
                             <p>{{ association.postalCode }} {{ association.city }}</p>
+                            
                         </div>
                     </v-list-item>
                 </v-list>
