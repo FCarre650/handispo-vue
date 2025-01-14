@@ -27,6 +27,13 @@ app.use(express.json())
 //couche assets: middleware pour servir des fichiers statiques (assets)
 app.use('/assets', express.static('./assets'))    
 
+
+app.get('/api/listAsso', async (req, res) => {
+   const associations = await prisma.association.findMany();
+   res.json(associations);
+});
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Configuration du port d'écoute
