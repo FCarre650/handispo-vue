@@ -29,15 +29,21 @@
 
         </section>
 
+        <section class="boutons">
+            <div class="bouton_haut">
+                <button class="btn_catalogue">LIIIIIIIIIIISTE</button>
+            </div>
+        </section>
+
         <section>
             <div class="flex">
                 <ul class="list">
-                    <li v-for="asso of assoList" >
-                        {{ asso.name }}
-                        {{ asso.location }}
-                        {{ asso.address }}
-                        {{ asso.postalCode }}
-                        {{ asso.city }}
+                    <li v-for="association of assoList" key="association.id">
+                        {{ association.name }}
+                        {{ association.location }}
+                        {{ association.address }}
+                        {{ association.postalCode }}
+                        {{ association.city }}
                     </li>
                 </ul>
             </div>

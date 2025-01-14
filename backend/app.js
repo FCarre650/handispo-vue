@@ -30,9 +30,9 @@ app.use('/assets', express.static('./assets'))
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-app.post("/api/listAsso", async (req, res) => {
-   const { name, location, address, postalCode, city } = req.body
-
+app.get("/api/listAsso", async (req, res) => {
+   const associations = await prisma.association.findMany()
+   res.json(associations)
 })
 
 
