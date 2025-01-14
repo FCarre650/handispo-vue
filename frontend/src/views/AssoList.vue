@@ -39,11 +39,13 @@
             <div class="flex">
                 <ul class="list">
                     <li v-for="association of assoList" key="association.id">
-                        {{ association.name }}
-                        {{ association.location }}
-                        {{ association.address }}
-                        {{ association.postalCode }}
-                        {{ association.city }}
+                        <div class="box">
+                            <p>{{ association.name }}</p>
+                            <p>{{ association.location }}</p>
+                            <p>{{ association.address }}</p>
+                            <p>{{ association.postalCode }}</p>
+                            <p>{{ association.city }}</p>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -54,3 +56,17 @@
     </div>
 
 </template>
+
+
+<style>
+
+.box {
+    border: solid;
+    background-color: grey;
+}
+
+li {
+    list-style-type: none;
+}
+
+</style>
