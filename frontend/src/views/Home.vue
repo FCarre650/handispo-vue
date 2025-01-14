@@ -11,7 +11,7 @@ import HeaderBar from '/src/components/header.vue'
     <section class="presentation">
         <h1>Bienvenue sur Handispo !</h1>
         <p>Explorez des activités adaptées à vos besoins et découvrez des associations,
-            des ressources, et des sports conçus pour vous.
+            des ressources, et des sports conçus pour vous !!! specifiquement
         </p>
     </section>
 
