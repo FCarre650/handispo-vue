@@ -53,6 +53,7 @@ header{
   flex-direction: column; /* Aligne les boutons en colonne */
   align-items: stretch; /* Les boutons s'étendent pour remplir la largeur */
   margin-top: 10px; /* Espacement entre les sections */
+  margin-bottom: 10px;
 }
 
 .btn_catalogue {
@@ -146,3 +147,4 @@ footer{
   width: 30px;
   background-color: #f0f0f0;
 }
+
