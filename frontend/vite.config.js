@@ -11,13 +11,14 @@ export default defineConfig({
       proxy: {
          // prevent CORS error in dev when backend and frontend servers run on different ports
          '^/auth/.*': {
-            target: 'http://localhost:3000/',
+            target: 'http://localhost:3010/',
             changeOrigin: true,
          },
-            '^/api/.*': {
-            target: 'http://localhost:3000/',
-            changeOrigin: true,
-            }
+
+         '^/api/.*': {
+         target: 'http://localhost:3010/',
+         changeOrigin: true,
+         }
          },
       }
 })
