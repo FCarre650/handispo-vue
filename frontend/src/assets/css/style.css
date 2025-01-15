@@ -3,8 +3,8 @@
     margin: 1em 2em;
   }
 }
-body {
 
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,13 +24,17 @@ header{
 }
 
 .logo{
-  height: 75px;
+  max-height: 200px;
+  margin-top: 10px;
   width: auto;
 }
 
 .compte{
-  height: 40px;
+  margin-top: -25px;
+  margin-right: 30px;
+  height: 75px;
   width: auto;
+  
 }
 
 .presentation{
@@ -140,5 +144,5 @@ footer{
 .icone_maison, .icone_liste, .icone_carte, .icone_catalogue, .icone_aide {
   height: 30px;
   width: 30px;
-  
+  background-color: #f0f0f0;
 }
