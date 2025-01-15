@@ -1,22 +1,15 @@
+@media screen and (min-width: 80rem) {
+  body {
+    margin: 1em 2em;
+  }
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Prend toute la hauteur de la fenêtre */
-  margin: 0;
   background-color: #f0f0f0; /* Couleur de fond */
 }
-
-.phone_container {
-  width: 375px; /* Largeur typique d'un téléphone */
-  height: 667px; /* Hauteur typique d'un téléphone */
-  border: 12px solid #333; /* Bordure pour simuler le cadre du téléphone */
-  border-radius: 36px; /* Coins arrondis */
-  background-color: #fff; /* Couleur de fond du téléphone */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Ombre pour donner un effet de profondeur */
-  position: relative; /* Pour positionner le contenu à l'intérieur */
-}
-
 
 header{
   display:flex;
@@ -31,13 +24,17 @@ header{
 }
 
 .logo{
-  height: 75px;
+  max-height: 200px;
+  margin-top: 10px;
   width: auto;
 }
 
 .compte{
-  height: 40px;
+  margin-top: -25px;
+  margin-right: 30px;
+  height: 75px;
   width: auto;
+  
 }
 
 .presentation{
@@ -71,6 +68,34 @@ header{
   cursor: pointer; /* Curseur en forme de main au survol */
   margin-bottom: 2px; /* Espacement entre les boutons */
 
+}
+
+.btn_filtres  {
+  text-align: center;
+  width: 50%; /* Prend 50% de la largeur du conteneur */
+  height: 100px;
+  padding: 20px; /* Espacement interne pour le bouton */
+  background-color: #d24b1a; /* Couleur de fond */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en forme de main au survol */
+}
+
+.btn_geolocalisation {
+  text-align: center;
+  width: 50%; /* Prend 50% de la largeur du conteneur */
+  height: 100px;
+  padding: 20px; /* Espacement interne pour le bouton */
+  background-color: grey; /* Couleur de fond */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en forme de main au survol */
 }
 
 .btn_liste, .btn_carte {
@@ -119,5 +144,5 @@ footer{
 .icone_maison, .icone_liste, .icone_carte, .icone_catalogue, .icone_aide {
   height: 30px;
   width: 30px;
-  
+  background-color: #f0f0f0;
 }
