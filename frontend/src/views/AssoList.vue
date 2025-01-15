@@ -94,7 +94,7 @@
                                     <v-card-text>
                                         <div class=" boxAsso">
                                         <a :href="association.website" target="_blank">{{ association.name }}</a>
-                                    </div>
+                                        </div>
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -131,5 +131,11 @@
     .boxAsso{
         border:solid 1px;
     }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
 </style>
 
