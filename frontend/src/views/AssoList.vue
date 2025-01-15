@@ -59,7 +59,7 @@
                                     <v-card title="Contact">
                                     <v-card-text>
                                         <div class=" boxAsso">
-                                        <p>{{ association.nom }}</p>
+                                        <p>{{ association.name }}</p>
                                         <p>{{ association.location }}</p>
                                         <p>{{ association.address }}</p>
                                         <p>{{ association.postalCode }} {{ association.city }}</p>
