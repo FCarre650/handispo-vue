@@ -77,7 +77,38 @@
                                     </v-card>
                                 </template>
                             </v-dialog>
-                            
+
+
+                            <v-dialog max-width="500">
+                                <template v-slot:activator="{ props: activatorProps }">
+                                    <v-btn
+                                    v-bind="activatorProps"
+                                    color="surface-variant"
+                                    text="Site Web"
+                                    variant="flat"
+                                    ></v-btn>
+                                </template>
+
+                                <template v-slot:default="{ isActive }">
+                                    <v-card title="Site Web">
+                                    <v-card-text>
+                                        <div class=" boxAsso">
+                                        <a :href="association.website" target="_blank">{{ association.name }}</a>
+                                    </div>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+
+                                        <v-btn
+                                        text="Fermer"
+                                        @click="isActive.value = false"
+                                        ></v-btn>
+                                    </v-card-actions>
+                                    </v-card>
+                                </template>
+                            </v-dialog>
+
+            
                         </div>
                     </v-list-item>
                 </v-list>
