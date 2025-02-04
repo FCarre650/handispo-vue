@@ -232,10 +232,24 @@ a {
   color: black;
 }
 
-.spinner {
-  display: flex;
-  justify-content: center;
-}
+    .spinner{
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn_filtres {
+        text-align: center;
+        width: 100%; /* Prend 50% de la largeur du conteneur */
+        height: 50px;
+        padding: 20px; /* Espacement interne pour le bouton */
+        background-color: #d24b1a; /* Couleur de fond */
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: white; /* Couleur du texte */
+        border: none; /* Pas de bordure */
+        border-radius: 5px; /* Coins arrondis */
+        cursor: pointer;
+    }
 
 .btn_filtres {
   text-align: center;
