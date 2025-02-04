@@ -33,6 +33,13 @@ app.get('/api/listAsso', async (req, res) => {
    res.json(associations);
 });
 
+app.get('/api/listSport', async (req, res) => {
+   const sports = await prisma.sport.findMany();
+   res.json(sports);
+   console.log("Liste des sports", sports)
+});
+
+
 
 // Configuration du port d'écoute
 const PORT = process.env.PORT || 3010  // Utilisation du port défini dans les variables d'environnement ou 3000 par défaut

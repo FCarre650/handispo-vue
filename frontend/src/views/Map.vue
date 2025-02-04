@@ -147,7 +147,7 @@
             <div class="bouton_haut">
                 <button class="btn_catalogue">CAAAAAAAAAARTE</button>
                 <!-- DO NOT DEPLOY TO LIVE, THIS IS MY PERSONAL KEY AND ITS NOT HIDDEN -->
-                <GoogleMap api-key="API HERE" style="width: 100%; height: 500px" :center="center"
+                <GoogleMap api-key="API" style="width: 100%; height: 500px" :center="center"
                     :zoom="15">
                     <CustomMarker :options="{ position: center, anchorPoint: 'BOTTOM_CENTER' }">
                         <div style="text-align: center">
