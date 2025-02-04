@@ -10,14 +10,10 @@
     const dialog = ref(false);
     
     onMounted(async () => {
-        console.log("Entered onmounted")
         loading.value = true;
         const response = await fetch("/api/listAsso")
-        console.log(loading.value)
         associationList.value = await response.json()
         loading.value = false;
-        console.log(loading.value)
-        console.log("associationList", associationList.value)
         
         for (const association of associationList.value) {
             associations.value[association.id] = association

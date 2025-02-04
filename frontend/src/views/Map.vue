@@ -1,14 +1,15 @@
-
 <script setup>
     import FooterButtons from '/src/components/footer.vue'
     import HeaderBar from '/src/components/header.vue'
     import { associations } from "/src/use/useAssociation"
     import {ref, onMounted, computed} from 'vue'
+    import { GoogleMap, Marker } from 'vue3-google-map'
 
     const associationList = ref([])
     const formData = ref({})
     const loading = ref(true);
     const dialog = ref(false);
+    const center = { lat: 43.60456242940044, lng: 1.443385651788076 }
     
     onMounted(async () => {
         console.log("Entered onmounted")
@@ -38,6 +39,7 @@
     })
 
 </script>
+
 
 <template>
     
@@ -141,8 +143,21 @@
 
     </div>
 
-    <FooterButtons/>
+        <section class="boutons">
+            <div class="bouton_haut">
+                <button class="btn_catalogue">CAAAAAAAAAARTE</button>
+                <!-- DO NOT DEPLOY TO LIVE, THIS IS MY PERSONAL KEY AND ITS NOT HIDDEN -->
+                <GoogleMap api-key="API HERE" style="width: 100%; height: 500px" :center="center"
+                    :zoom="15">
+                    <CustomMarker :options="{ position: center, anchorPoint: 'BOTTOM_CENTER' }">
+                        <div style="text-align: center">
+                        </div>
+                    </CustomMarker>
+                </GoogleMap>
+            </div>
+        </section>
 
+    <FooterButtons/>
 
     
 </template>
