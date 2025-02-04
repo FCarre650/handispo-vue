@@ -6,7 +6,7 @@ import PageButtons from '/src/components/buttons.vue'
 </script>
 
 <template>
-<div class="phone_container">
+<div class="">
    
     <HeaderBar/>
     <section class="presentation">
