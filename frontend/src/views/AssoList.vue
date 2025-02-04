@@ -3,10 +3,12 @@ import FooterButtons from "/src/components/footer.vue";
 import HeaderBar from "/src/components/header.vue";
 import { associations } from "/src/use/useAssociation";
 import { sports } from "../use/useSport";
+import { handicaps } from "../use/useHandi";
 import { ref, onMounted, computed } from "vue";
 
 const associationList = ref([]);
 const sportList = ref([]);
+const handiList = ref([]);
 
 const formData = ref({});
 const loading = ref(true);
@@ -31,6 +33,15 @@ onMounted(async () => {
 
   for (const sport of sportList.value) {
     sports.value[sport.id] = sport;
+  }
+
+  //Récupération des handicaps
+  const respHandi = await fetch("/api/listHandi");
+  handiList.value = await respHandi.json();
+  console.log("Type handicaps", handiList.value);
+
+  for (const handicap of handiList.value) {
+    handicaps.value[handicap.id] = handicap;
   }
 
   loading.value = false;
@@ -93,20 +104,15 @@ const filteredList = computed(() => {
 
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="['Occitanie']"
-                  label="Région"
+                  :items="handiList"
+                  item-title="name"
+                  label="Type de handicap"
+                  v-model="formData.handicap"
                   required
                 ></v-select>
               </v-col>
 
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  :items="['Haute-Garonne', 'Lot', 'Ariège', 'Tarn', 'Aude']"
-                  label="Département"
-                  auto-select-first
-                  multiple
-                ></v-autocomplete>
-              </v-col>
+              
             </v-row>
           </v-card-text>
 
