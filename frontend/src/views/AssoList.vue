@@ -237,7 +237,7 @@
     .btn_filtres {
         text-align: center;
         width: 100%; /* Prend 50% de la largeur du conteneur */
-        height: 300px;
+        height: 50px;
         padding: 20px; /* Espacement interne pour le bouton */
         background-color: #d24b1a; /* Couleur de fond */
         font-family: Arial, Helvetica, sans-serif;
