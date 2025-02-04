@@ -6,12 +6,17 @@
 
     const associationList = ref([])
     const formData = ref({})
-
+    const loading = ref(true);
     const dialog = ref(false);
     
     onMounted(async () => {
+        console.log("Entered onmounted")
+        loading.value = true;
         const response = await fetch("/api/listAsso")
-        associationList.value = await response.json() 
+        console.log(loading.value)
+        associationList.value = await response.json()
+        loading.value = false;
+        console.log(loading.value)
         console.log("associationList", associationList.value)
         
         for (const association of associationList.value) {
@@ -19,10 +24,16 @@
     }
  })
 
+    /* This bit of code takes the formdata value (user input in the specified field) 
+    and returns a second list with only the specified associations. 
+    If form is empty, returns the full list. */
+
  const filteredList = computed(() => {
         let searchValue = formData.value.postalCode
         console.log(associationList.value.postalCode)
-        return associationList.value.filter(association => association.postalCode.includes(searchValue))
+        if (searchValue)
+            return associationList.value.filter(association => association.postalCode.includes(searchValue))
+        return associationList.value
     })
 
 </script>
@@ -125,7 +136,10 @@
         </v-dialog>
   </div>
 
-        <section>
+        <div v-if="loading" class="spinner">
+            <v-progress-circular color="orange" indeterminate :size="45"></v-progress-circular>
+        </div>
+        <section v-else>
 
             <div class="flex">
                 <v-list class="list">
@@ -217,6 +231,11 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    .spinner{
+        display: flex;
+        justify-content: center;
     }
 
     .btn_filtres {
