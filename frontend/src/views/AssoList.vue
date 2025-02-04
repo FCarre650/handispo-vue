@@ -6,12 +6,17 @@
 
     const associationList = ref([])
     const formData = ref({})
-
+    const loading = ref(true);
     const dialog = ref(false);
     
     onMounted(async () => {
+        console.log("Entered onmounted")
+        loading.value = true;
         const response = await fetch("/api/listAsso")
-        associationList.value = await response.json() 
+        console.log(loading.value)
+        associationList.value = await response.json()
+        loading.value = false;
+        console.log(loading.value)
         console.log("associationList", associationList.value)
         
         for (const association of associationList.value) {
@@ -131,7 +136,10 @@
         </v-dialog>
   </div>
 
-        <section>
+        <div v-if="loading" class="spinner">
+            <v-progress-circular color="orange" indeterminate :size="45"></v-progress-circular>
+        </div>
+        <section v-else>
 
             <div class="flex">
                 <v-list class="list">
@@ -223,6 +231,11 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    .spinner{
+        display: flex;
+        justify-content: center;
     }
 
     .btn_filtres {
