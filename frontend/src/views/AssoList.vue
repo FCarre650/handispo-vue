@@ -19,10 +19,16 @@
     }
  })
 
+    /* This bit of code takes the formdata value (user input in the specified field) 
+    and returns a second list with only the specified associations. 
+    If form is empty, returns the full list. */
+
  const filteredList = computed(() => {
         let searchValue = formData.value.postalCode
         console.log(associationList.value.postalCode)
-        return associationList.value.filter(association => association.postalCode.includes(searchValue))
+        if (searchValue)
+            return associationList.value.filter(association => association.postalCode.includes(searchValue))
+        return associationList.value
     })
 
 </script>
