@@ -246,7 +246,7 @@ a {
 .btn_filtres {
   text-align: center;
   align-content: center;
-  width: 50%; /* Prend 50% de la largeur du conteneur */
+  width: 100%; /* Prend 50% de la largeur du conteneur */
   height: 300px;
   padding: 40px; /* Espacement interne pour le bouton */
   background-color: #d24b1a; /* Couleur de fond */
