@@ -153,8 +153,9 @@ const filteredList = computed(() => {
             <div class="boxAsso">
               <h2>{{ association.name }}</h2>
               <p>📍 {{ association.location }}, {{ association.address }}, {{ association.postalCode }} {{ association.city }}</p>
-              
-              
+              <p>{{ association.sports.map(sport => sport.name).join(", ") }}</p>
+              <p>{{ association.handicaps.map(handicap => handicap.name).join(", ") }}</p>
+
               <v-dialog max-width="500">
                 <template v-slot:activator="{ props: activatorProps }">
                   <v-btn

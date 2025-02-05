@@ -29,7 +29,12 @@ app.use('/assets', express.static('./assets'))
 
 
 app.get('/api/listAsso', async (req, res) => {
-   const associations = await prisma.association.findMany();
+   const associations = await prisma.association.findMany({
+      include:{
+         sports: true,
+         handicaps:true,
+      }
+   });
    res.json(associations);
 });
 
