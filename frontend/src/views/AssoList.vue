@@ -52,15 +52,37 @@ onMounted(async () => {
     and returns a second list with only the specified associations. 
     If form is empty, returns the full list. */
 
-const filteredList = computed(() => {
-  let searchValue = formData.value.postalCode;
-  console.log(associationList.value.postalCode);
-  if (searchValue)
-    return associationList.value.filter((association) =>
-      association.postalCode.includes(searchValue)
+  const filteredList = computed(() => {
+    let filtered = associationList.value;
+
+    // Filtrer par code postal
+    if (formData.value.postalCode) {
+      filtered = filtered.filter((association) =>
+        association.postalCode.includes(formData.value.postalCode)
+      );
+    }
+
+    // Filtrer par sport
+    if (formData.value.sport) {
+    console.log("Sport sélectionné:", formData.value.sport);
+    console.log("Nom du sport sélectionné:", formData.value.sport);
+    filtered = filtered.filter((association) =>
+      association.sports.some(sport => sport.name === formData.value.sport)
     );
-  return associationList.value;
-});
+    console.log("YOUHOUUUUUUUUUUUUUUUUU", filtered)
+  }
+
+    // Filtrer par handicap
+    if (formData.value.handicap) {
+      console.log("Handicap sélectionné:", formData.value.handicap);
+      console.log("Nom handicap sélectionné:", formData.value.handicap);
+      filtered = filtered.filter((association) =>
+        association.handicaps.some(handicap => handicap.name === formData.value.handicap)
+      );
+      console.log("YOUHOUUUUUUUUUUUUUUUUU2", filtered)
+    }
+    return filtered;
+  });
 </script>
 
 <template>
