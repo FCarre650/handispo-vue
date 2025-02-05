@@ -4,6 +4,7 @@ import {PrismaClient} from '@prisma/client'        // Importation du client Pris
 import bcrypt from 'bcryptjs'                      // Importation de bcrypt pour le hachage des mots de passe 
 import { v4 as uuidv4 } from 'uuid'                // Importation de la fonction uuid pour générer des identifiants uniques
 import cookieParser from 'cookie-parser'           // Importation du middleware pour gérer les cookies 
+import jwt from 'jsonwebtoken'
 
 //import { sendMyMail } from '../frontend/use/use.js'        // Importation de la fonction d'envoi d'e-mails*/
 import {sendMyMail, generateRandomCode} from './lib/mail.js'  // Importation de la fonction pour générer des codes aléatoires
@@ -12,6 +13,8 @@ import {sendMyMail, generateRandomCode} from './lib/mail.js'  // Importation de 
 const prisma = new PrismaClient() // Création d'une instance du client Prisma pour interagir avec la base de données
 
 const app = express()            // Création d'une instance d'Express
+
+const { sign } = jwt
 
 app.set('view engine', 'ejs')    // Configuration du moteur de rendu pour utiliser EJS
 
@@ -49,6 +52,33 @@ app.get('/api/listHandi', async (req, res) => {
    res.json(handicaps);
    console.log("Liste des type de handicap", handicaps)
 });
+
+
+
+app.get('/jwt', (req, res) => {
+   const createTokenFromJson = (jsonData, options = {}) => {
+      try{
+         const secretKey = 'test'
+         const token = jwt.sign(jsonData, secretKey, options)
+         return token
+      } catch(error){
+         console.log("Error : ", error.message)
+         return null
+      }
+   }
+
+   const jsonData = req.body  //{ email: "buisson@yopmail.fr", password: "coucou" } RÉCUPÉRER EMAIL ET PASSWORD DEPUIS LA BASE DE DONNÉE  + ASSOCIER UN TOKEN AU MODÈLE USER ?
+   const token = createTokenFromJson(jsonData)
+
+   if (token) {
+      res.json({ status: true, token: token })
+   } else {
+      res.json({ status: false })
+   }
+
+})
+
+
 
 // Configuration du port d'écoute
 const PORT = process.env.PORT || 3010  // Utilisation du port défini dans les variables d'environnement ou 3000 par défaut
