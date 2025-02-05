@@ -47,6 +47,7 @@ onMounted(async () => {
   loading.value = false;
 });
 
+
 /* This bit of code takes the formdata value (user input in the specified field) 
     and returns a second list with only the specified associations. 
     If form is empty, returns the full list. */
@@ -145,32 +146,33 @@ const filteredList = computed(() => {
         :size="45"
       ></v-progress-circular>
     </div>
-    <section v-else>
+    <section class= '' v-else>
       <div class="flex">
         <v-list class="list">
           <v-list-item v-for="association of filteredList" key="association.id">
             <div class="boxAsso">
-              <p>{{ association.name }}</p>
+              <h2>{{ association.name }}</h2>
+              <p>📍 {{ association.location }}, {{ association.address }}, {{ association.postalCode }} {{ association.city }}</p>
+              
+              
               <v-dialog max-width="500">
                 <template v-slot:activator="{ props: activatorProps }">
                   <v-btn
+                    class="boutons-assoList"
                     v-bind="activatorProps"
                     color="surface-variant"
                     text="Contact"
                     variant="flat"
+                    size="large"
                   ></v-btn>
                 </template>
 
                 <template v-slot:default="{ isActive }">
                   <v-card title="Contact">
                     <v-card-text>
-                      <div class="boxAsso">
-                        <p>{{ association.name }}</p>
-                        <p>{{ association.location }}</p>
-                        <p>{{ association.address }}</p>
-                        <p>
-                          {{ association.postalCode }} {{ association.city }}
-                        </p>
+                      <div class="">
+                        <p>📞  {{ association.phone }}</p>
+                        <p>📩  {{ association.email }}</p>
                       </div>
                     </v-card-text>
 
@@ -189,10 +191,12 @@ const filteredList = computed(() => {
               <v-dialog max-width="500">
                 <template v-slot:activator="{ props: activatorProps }">
                   <v-btn
+                    class="boutons-assoList"
                     v-bind="activatorProps"
                     color="surface-variant"
                     text="Site Web"
                     variant="flat"
+                    size="large"
                   ></v-btn>
                 </template>
 
@@ -230,23 +234,34 @@ const filteredList = computed(() => {
 
 <style scoped>
 .boxAsso {
-  border: solid 1px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 10px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s;
 }
+
 
 a {
   text-decoration: none;
   color: black;
 }
 
-    .spinner{
-        display: flex;
-        justify-content: center;
-    }
+.spinner{
+    display: flex;
+    justify-content: center;
+}
+
+.boutons-assoList {
+  margin: 10px;
+}
 
 .btn_filtres {
   text-align: center;
   align-content: center;
-  width: 50%; /* Prend 50% de la largeur du conteneur */
+  width: 100%; /* Prend 50% de la largeur du conteneur */
   height: 300px;
   padding: 40px; /* Espacement interne pour le bouton */
   background-color: #d24b1a; /* Couleur de fond */
