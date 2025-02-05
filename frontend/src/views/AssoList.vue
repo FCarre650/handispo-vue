@@ -146,7 +146,7 @@ const filteredList = computed(() => {
         :size="45"
       ></v-progress-circular>
     </div>
-    <section v-else>
+    <section class= '' v-else>
       <div class="flex">
         <v-list class="list">
           <v-list-item v-for="association of filteredList" key="association.id">
