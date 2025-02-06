@@ -1,6 +1,7 @@
 <script setup>
 import FooterButtons from '/src/components/footer.vue'
 import HeaderBar from '/src/components/header.vue'
+import router from '../router'
 import { ref } from 'vue';
 
 const formData = ref({});
@@ -9,23 +10,23 @@ const visible = ref(false);
 const error_message = ref("")
 
 async function createAccount() {
-    if (form_data.value.password === form_data.value.password2){
+    if (formData.value.password === formData.value.password2){
         const response = await fetch('/auth/create_account', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'
             },
-            body: JSON.stringify(form_data.value), 
+            body: JSON.stringify(formData.value), 
         })
 
         if (response.status === 200) {
-            router.push("login")
+            router.push("/login")
         } else if (response.status === 400){
-            error_message.value = "l'email existe déjà "
+            error_message.value = "L'email existe déjà "
         } else {
-            error_message.value = "erreur inconnue"
+            error_message.value = "Erreur inconnue"
         }
     } else { 
-             error_message.value = "Les mots de passe sont diférents "
+             error_message.value = "Les mots de passe sont différents "
     }
 }
 
@@ -49,6 +50,9 @@ async function createAccount() {
           placeholder="example@gmail.com"
           prepend-inner-icon="mdi-email-outline"
           variant="outlined"
+          type="email"
+          id="email"
+          name="email"
           v-model="formData.email"
         ></v-text-field>
   
@@ -65,7 +69,12 @@ async function createAccount() {
           prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
+          type="password"
+          id="password"
+          name="password"
+          minlength = 6
           v-model="formData.password"
+
         ></v-text-field>
 
         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
@@ -81,6 +90,10 @@ async function createAccount() {
           prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
+          type="password"
+          id="password2"
+          name="password2"
+          minlength = 6
           v-model="formData.password2"
         ></v-text-field>
   
@@ -89,13 +102,13 @@ async function createAccount() {
           color="surface-variant"
           variant="tonal"
         >
-          <v-card-text class="text-medium-emphasis text-caption">
-            Erreur ???          
+          <v-card-text class="text-medium-emphasis text-caption error" v-if="error_message">
+            {{error_message}}          
         </v-card-text>
         </v-card>
   
         <v-btn
-          @submit.prevent="createAccount"
+          @click="createAccount"
           class="mb-8"
           color="surface-variant"
           size="large"
@@ -108,9 +121,8 @@ async function createAccount() {
         <v-card-text class="text-center">
           <a
             class="text-black text-decoration-none"
-            href="#"
+            href="login"
             rel="noopener noreferrer"
-            target="_blank"
           >
             Connexion <v-icon icon="mdi-chevron-right"></v-icon>
           </a>

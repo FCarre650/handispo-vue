@@ -6,6 +6,7 @@ import SportsCatalog from '../views/SportsCatalog.vue';
 import Map from '../views/Map.vue';
 import Login from '../views/Login.vue';
 import CreateAccount from '../views/CreateAccount.vue';
+import UserAccount from '../views/UserAccount.vue';
 
 
 const routes = [
@@ -42,6 +43,10 @@ const routes = [
    {
       path: '/create-account',
       component: CreateAccount,
+   },
+   {
+      path: '/user-account',
+      component: UserAccount,
    }
  
 ]

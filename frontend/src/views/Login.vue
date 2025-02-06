@@ -3,10 +3,31 @@ import FooterButtons from '/src/components/footer.vue'
 import HeaderBar from '/src/components/header.vue'
 import PageButtons from '/src/components/buttons.vue'
 import router from '../router'
+import { emailPerson } from '/src/use/UseEmailPerson'
 import { ref } from 'vue';
 
 const visible = ref(false);
 
+const formData = ref({})
+const error_message = ref("")
+
+
+async function checkUser () {
+    console.log(formData.value)
+    emailPerson.value = formData.value.email
+    const response = await fetch('/auth/check_user', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData.value), 
+    })
+
+    if (response.status === 200) {
+        router.push("/user-account")
+    } else {
+        error_message.value = "Email ou mot de passe incorrect "
+    }
+}
 </script>
 
 
@@ -27,6 +48,10 @@ const visible = ref(false);
           placeholder="example@gmail.com"
           prepend-inner-icon="mdi-email-outline"
           variant="outlined"
+          type="email"
+          id="email"
+          name="email"
+          v-model="formData.email"
         ></v-text-field>
   
         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
@@ -49,6 +74,10 @@ const visible = ref(false);
           prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
+          type="password"
+          id="password"
+          name="password"
+          v-model="formData.password"
         ></v-text-field>
   
         <v-card
@@ -56,12 +85,13 @@ const visible = ref(false);
           color="surface-variant"
           variant="tonal"
         >
-          <v-card-text class="text-medium-emphasis text-caption">
-            Erreur ???          
+        <v-card-text class="text-medium-emphasis text-caption error" v-if="error_message">
+            {{error_message}}           
         </v-card-text>
         </v-card>
   
         <v-btn
+          @click="checkUser"
           class="mb-8"
           color="surface-variant"
           size="large"
@@ -74,9 +104,8 @@ const visible = ref(false);
         <v-card-text class="text-center">
           <a
             class="text-black text-decoration-none"
-            href="#"
+            href="create-account"
             rel="noopener noreferrer"
-            target="_blank"
           >
             Créer un compte <v-icon icon="mdi-chevron-right"></v-icon>
           </a>

@@ -3,10 +3,10 @@
 
 <template>
     <header>
-        <a href="" >
+        <a href="home" >
         <img src="../assets/images/logo.png" alt="logo" class="logo">
         </a>
-        <a href="" >
+        <a href="login" >
         <img src="../assets/images/account.png" alt="compte utilisateur" class="compte">
         </a>
     </header>
