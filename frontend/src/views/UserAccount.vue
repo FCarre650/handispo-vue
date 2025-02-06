@@ -1,16 +1,32 @@
+<script setup>
+import FooterButtons from "/src/components/footer.vue";
+import HeaderBar from "/src/components/header.vue";
+
+
+</script>
+
+
 <template>
-<h1>HELLO HANDISPO FAN !</h1>
+<div>
+    <HeaderBar />
+    <section class="presentation">
+        <h1>Bienvenue votre compte Handispo Fan !</h1>
+        <p>Vous pourrez sauvegarder ici toutes vos recherches et vos associations favorites.
+        </p>
+    </section>
+
+
+
+
+
+    <FooterButtons />
+</div>
 
 
 
 
 </template>
 
-<script setup>
-
-
-
-</script>
 
 <style>
 
