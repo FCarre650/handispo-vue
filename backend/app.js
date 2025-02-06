@@ -98,12 +98,20 @@ app.post("/auth/check_user", async (req, res) => {
         }
       };
 
-      const token = createTokenFromJson({ email, password });
+      const token = createTokenFromJson({ email, password }, {expiresIn: '1h'});
 
       if (token) {
         //res.json({ status: true, token: token });
+        const cookieOptions = {
+         httpOnly: true, // Empêche l'accès au cookie via JavaScript
+         secure: process.env.NODE_ENV === 'production', // Utiliser secure en production
+         sameSite: 'Strict', // Prévenir les attaques CSRF
+         expires: new Date(Date.now() + 3600000) // 1 heure en millisecondes
+       };
+
+        res.cookie('access_token', token, cookieOptions)
         res.sendStatus(200);
-        console.log("TOKEEEEENNNNNN", token)
+        console.log("TOKEEEEENN", token)
       }
     } else {
       // Si le mot de passe est incorrecte, affiche un message d'erreur sur la page de connexion
