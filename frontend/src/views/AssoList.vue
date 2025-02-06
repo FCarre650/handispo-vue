@@ -14,6 +14,8 @@ const formData = ref({});
 const loading = ref(true);
 const dialog = ref(false);
 
+const isHeartFilled = ref(false); 
+
 
 onMounted(async () => {
   loading.value = true;
@@ -22,9 +24,15 @@ onMounted(async () => {
   const response = await fetch("/api/listAsso");
   associationList.value = await response.json();
 
+
   for (const association of associationList.value) {
     associations.value[association.id] = association;
   }
+
+  // Fonction pour basculer l'état du cœur
+  const toggleHeart = () => {
+      isHeartFilled.value = !isHeartFilled.value;
+    };
 
   //Récupération des sports
   const resp = await fetch("/api/listSport");
@@ -47,6 +55,14 @@ onMounted(async () => {
   loading.value = false;
 });
 
+  // Fonction pour basculer l'état du cœur pour une association spécifique
+  const toggleHeart = (associationId) => {
+    const association = associationList.value.find(a => a.id === associationId);
+    if (association) {
+      console.log("OOOOOOOOOOOOOO", association)
+      association.isHeartFilled = !association.isHeartFilled; // Inverse l'état du cœur
+    }
+  };
 
 /* This bit of code takes the formdata value (user input in the specified field) 
     and returns a second list with only the specified associations. 
@@ -175,6 +191,17 @@ onMounted(async () => {
         <v-list class="list">
           <v-list-item v-for="association of filteredList" key="association.id">
             <div class="boxAsso">
+              <v-container>
+                <v-row justify="end">
+                  <v-icon 
+                    @click="toggleHeart(association.id)" 
+                    :class="{'red--text': isHeartFilled, 'grey--text': !isHeartFilled}" 
+                    style="font-size: 35px; cursor: pointer;"
+                  >
+                    {{ association.isHeartFilled ? 'mdi-heart' : 'mdi-heart-outline' }}
+                  </v-icon>
+                </v-row>
+                </v-container>
               <h2>{{ association.name }}</h2>
               <p>📍 {{ association.location }}, {{ association.address }}, {{ association.postalCode }} {{ association.city }}</p>
               <p>{{ association.sports.map(sport => sport.name).join(", ") }}</p>
@@ -296,4 +323,9 @@ a {
   border-radius: 5px; /* Coins arrondis */
   cursor: pointer;
 }
+
+.grey--text {
+  color: #d24b1a; /* Couleur rouge pour le cœur rempli */
+}
+
 </style>
