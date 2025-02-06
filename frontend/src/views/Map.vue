@@ -2,28 +2,52 @@
     import FooterButtons from '/src/components/footer.vue'
     import HeaderBar from '/src/components/header.vue'
     import { associations } from "/src/use/useAssociation"
+    import { sports } from "../use/useSport"
+    import { handicaps } from "../use/useHandi"
     import {ref, onMounted, computed} from 'vue'
     import { GoogleMap, Marker } from 'vue3-google-map'
 
+
     const associationList = ref([])
+    const sportList = ref([]);
+    const handiList = ref([]);
+
     const formData = ref({})
     const loading = ref(true);
     const dialog = ref(false);
     const center = { lat: 43.60456242940044, lng: 1.443385651788076 }
+
     
     onMounted(async () => {
-        console.log("Entered onmounted")
         loading.value = true;
+
+        // Récupération des associations
         const response = await fetch("/api/listAsso")
-        console.log(loading.value)
         associationList.value = await response.json()
-        loading.value = false;
-        console.log(loading.value)
-        console.log("associationList", associationList.value)
         
         for (const association of associationList.value) {
             associations.value[association.id] = association
         }
+
+        // Récupération des sports 
+        const resp = await fetch("/api/listSport");
+        sportList.value = await resp.json();
+        console.log("Sports", sportList.value);
+
+        for (const sport of sportList.value) {
+            sports.value[sport.id] = sport;
+        }
+
+        // Récupération des handicaps
+        const respHandi = await fetch("/api/listHandi");
+        handiList.value = await respHandi.json();
+        console.log("Type handicaps", handiList.value);
+
+        for (const handicap of handiList.value) {
+            handicaps.value[handicap.id] = handicap;
+        }
+
+        loading.value = false;
     })
 
     /* This bit of code takes the formdata value (user input in the specified field) 
@@ -31,11 +55,35 @@
     If form is empty, returns the full list. */
 
     const filteredList = computed(() => {
-        let searchValue = formData.value.postalCode
-        console.log(associationList.value.postalCode)
-        if (searchValue)
-            return associationList.value.filter(association => association.postalCode.includes(searchValue))
-        return associationList.value
+        let filtered = associationList.value;
+
+        // Filtrer par code postal 
+        if (formData.value.postalCode) {
+            filtered = filtered.filter((association) =>
+                association.postalCode.includes(formData.value.postalCode)
+            );
+        }
+
+        // Filtrer par sport
+        if (formData.value.sport) {
+            console.log("Sport sélectionné:", formData.value.sport);
+            console.log("Nom du sport sélectionné:", formData.value.sport);
+            filtered = filtered.filter((association) =>
+            association.sports.some(sport => sport.name === formData.value.sport)
+            );
+            console.log("YOUHOUUUUUUUUUUUUUUUUU", filtered)
+        }
+
+        // Filtrer par handicap 
+        if (formData.value.handicap) {
+            console.log("Handicap sélectionné:", formData.value.handicap);
+            console.log("Nom handicap sélectionné:", formData.value.handicap);
+            filtered = filtered.filter((association) =>
+                association.handicaps.some(handicap => handicap.name === formData.value.handicap)
+            );
+            console.log("YOUHOUUUUUUUUUUUUUUUUU2", filtered)
+        }
+        return filtered;
     })
 
 </script>
@@ -87,34 +135,24 @@
                 sm="6"
                 >
                 <v-select
-                    :items="['Badminton', 'Rugby']"
+                    :items="sportList"
+                    item-title="name"
                     label="Type de sport"
+                    v-model = "formData.sport"
                     required
                 ></v-select>
                 </v-col>
-
-                <v-col
-                cols="12"
-                sm="6"
-                >
+                
+                <v-col cols="12" sm="6">
                 <v-select
-                    :items="['Occitanie']"
-                    label="Région"
-                    required
+                  :items="handiList"
+                  item-title="name"
+                  label="Type de handicap"
+                  v-model="formData.handicap"
+                  required
                 ></v-select>
                 </v-col>
-
-                <v-col
-                cols="12"
-                sm="6"
-                >
-                <v-autocomplete
-                    :items="['Haute-Garonne', 'Lot', 'Ariège', 'Tarn', 'Aude']"
-                    label="Département"
-                    auto-select-first
-                    multiple
-                ></v-autocomplete>
-                </v-col>
+                
             </v-row>
 
             </v-card-text>
@@ -145,7 +183,6 @@
 
         <section class="boutons">
             <div class="bouton_haut">
-                <button class="btn_catalogue">CAAAAAAAAAARTE</button>
                 <!-- DO NOT DEPLOY TO LIVE, THIS IS MY PERSONAL KEY AND ITS NOT HIDDEN -->
                 <GoogleMap api-key="API" style="width: 100%; height: 500px" :center="center"
                     :zoom="15">
