@@ -4,13 +4,14 @@ import Home from '/src/views/Home.vue'
 import AssoList from '/src/views/AssoList.vue'
 import SportsCatalog from '../views/SportsCatalog.vue';
 import Map from '../views/Map.vue';
-
+import Login from '../views/Login.vue';
+import CreateAccount from '../views/CreateAccount.vue';
 
 
 const routes = [
     {
-        path: '/',
-        redirect: '/home',
+      path: '/',
+      redirect: '/home',
     },
 
    {
@@ -19,20 +20,29 @@ const routes = [
    },
 
    {
-    path: '/asso-list',
-    component: AssoList,
+      path: '/asso-list',
+      component: AssoList,
    },
 
    {
-    path: '/sports-catalog',
-    component: SportsCatalog,
+      path: '/sports-catalog',
+      component: SportsCatalog,
    },
 
    {
-    path: '/map',
-    component: Map,
+      path: '/map',
+      component: Map,
    },
 
+   {
+      path: '/login',
+      component: Login,
+   },
+   
+   {
+      path: '/create-account',
+      component: CreateAccount,
+   }
  
 ]
 

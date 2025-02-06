@@ -53,6 +53,31 @@ app.get('/api/listHandi', async (req, res) => {
    console.log("Liste des type de handicap", handicaps)
 });
 
+//CREATE ACCOUNT
+app.post('/auth/create_account', async(req,res) =>{
+   const {email,password,password2} = req.body  // Récupération des données du formulaire
+
+   // Vérification si les mots de passe correspondent
+   let user = await prisma.user.findUnique({
+      where: { email}  // Recherche d'un utilisateur par e-mail
+   })
+
+   if (user){
+      // Si l'utilisateur existe déjà, affiche un message d'erreur
+      res.sendStatus(400)
+   } else {
+      // Si l'utilisateur n'existe pas, créer un nouvel utilisateur
+      const hash_password = await bcrypt.hash(password, 3)  // Hachage du mot de passe
+      user = await prisma.user.create({
+         data:{
+            email,
+            password : hash_password,
+            role: "handispo-fan",         // Rôle par défaut
+         }
+      })
+      res.sendStatus(200)  // Redirection vers la page de validation du compte
+      }
+})
 
 
 app.get('/jwt', (req, res) => {
