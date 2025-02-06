@@ -266,7 +266,6 @@ onMounted(async () => {
   transition: transform 0.2s;
 }
 
-
 a {
   text-decoration: none;
   color: black;
